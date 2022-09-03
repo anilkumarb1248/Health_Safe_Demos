@@ -1,0 +1,25 @@
+***** MYSQL ******
+---- Create a user with name 'healthsafe' using mysql command prompt
+
+CREATE USER 'healthsafe' IDENTIFIED BY 'healthsafe';
+
+--- Grant the permissions
+
+	GRANT ALL PRIVILEGES ON HEALTH_SAFE_DATABASE.* TO 'healthsafe'@'localhost';
+
+	If you failed to grant on localhost, you have to create the user like this
+
+	CREATE USER 'healthsafe'@'localhost' IDENTIFIED WITH mysql_native_password BY 'healthsafe';
+	GRANT ALL PRIVILEGES ON HEALTH_SAFE_DATABASE.* healthsafe'@'localhost';
+
+
+---- Conntect to the user using command prompt
+
+mysql -u healthsafe -p
+healthsafe
+
+---- Create database
+
+CREATE DATABASE  IF NOT EXISTS HEALTH_SAFE_DATABASE;
+
+USE HEALTH_SAFE_DATABASE;
