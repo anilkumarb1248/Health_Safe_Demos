@@ -21,7 +21,8 @@ public class IncidentAction implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="INCIDENT_ACTION_ID", unique = true, nullable = false)
+//    @Column(name="INCIDENT_ACTION_ID", unique = true, nullable = false)
+    @Column(name="INCIDENT_ACTION_ID", unique = true)
     private Integer incidentActionId;
 
 //    @Column(name="INCIDENT_ID")
@@ -34,11 +35,13 @@ public class IncidentAction implements Serializable {
     private LocalDateTime createdTs;
 
     @ManyToOne
-    @JoinColumn(name="INCIDENT_ID", referencedColumnName = "INCIDENT_ID", nullable = false)
+//    @JoinColumn(name="INCIDENT_ID", referencedColumnName = "INCIDENT_ID", nullable = false)
+    @JoinColumn(name="INCIDENT_ID")
     private Incident incident;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID")
+    @JoinColumn(name = "INCIDENT_ACTION_ID")
     private List<IncidentActionMember> incidentActionMembers;
 
     public Integer getIncidentActionId() {

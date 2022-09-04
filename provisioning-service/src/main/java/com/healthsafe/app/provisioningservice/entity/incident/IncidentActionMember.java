@@ -21,7 +21,8 @@ public class IncidentActionMember  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="INCIDENT_ACTION_MBR_ID", unique = true, nullable = false)
+//    @Column(name="INCIDENT_ACTION_MBR_ID", unique = true, nullable = false)
+    @Column(name="INCIDENT_ACTION_MBR_ID", unique = true)
     private Integer incidentActionMbrId;
 
 //    @Column(name="INCIDENT_ACTION_ID")
@@ -45,7 +46,8 @@ public class IncidentActionMember  implements Serializable {
     private LocalDateTime createdTs;
 
     @ManyToOne
-    @JoinColumn(name="INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID", nullable = false)
+//    @JoinColumn(name="INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID", nullable = false)
+    @JoinColumn(name="INCIDENT_ACTION_ID")
     private IncidentAction incidentAction;
 
     public Integer getIncidentActionMbrId() {
@@ -111,4 +113,5 @@ public class IncidentActionMember  implements Serializable {
     public void setIncidentAction(IncidentAction incidentAction) {
         this.incidentAction = incidentAction;
     }
+
 }

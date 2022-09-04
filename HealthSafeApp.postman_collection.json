@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "0e70fd66-6393-4475-b3ab-d1aabafd598c",
+		"name": "HealthSafeApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "provisioning-service",
+			"item": [
+				{
+					"name": "IncidentController",
+					"item": [
+						{
+							"name": "Create Incident",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reasonTypeCode\": \"P\",\r\n    \"incident\": {\r\n        \"healthSafeId\": \"anil_hsid\",\r\n        \"incidentNumber\": \"Dummy_Incident\",\r\n        \"prtl\": {\r\n            \"prtlId\": 1\r\n        },\r\n        \"enablementMessage\": {\r\n            \"enableDisableMessageId\": null\r\n        },\r\n        \"enablementReason\": {\r\n            \"reasonId\": 1\r\n        },\r\n        \"issueOccurredTs\": \"2022-09-04T11:35:57.9206813\",\r\n        \"issueOccurredTimeZone\": \"(GMT+5:30)\",\r\n        \"issueDescription\": \"issueDescription\",\r\n        \"callerFirstName\": \"callerFirstName\",\r\n        \"callerLastName\": \"callerLastName\",\r\n        \"callerPhone\": \"callerPhone\",\r\n        \"callerEmail\": \"callerEmail\",\r\n        \"callerAuthorizedForOther\": \"callerAuthorizedForOther\",\r\n        \"callerAuthorizedMbrAccount\": \"callerAuthorizedMbrAccount\",\r\n        \"callerDevice\": \"callerDevice\",\r\n        \"callerInfoShared\": \"callerInfoShared\",\r\n        \"empFirstName\": \"empFirstName\",\r\n        \"empLastName\": \"empLastName\",\r\n        \"empMsId\": \"empMsId\",\r\n        \"empEmail\": \"empEmail\",\r\n        \"empDescription\": \"empDescription\",\r\n        \"reporterEmail\": \"reporterEmail\",\r\n        \"reporterTs\": \"2022-09-04T11:35:57.9206813\",\r\n        \"reporterTimeZone\": \"(GMT+5:30)\",\r\n        \"createdBy\": \"createdBy\",\r\n        \"incidentActions\": [\r\n            {\r\n                \"createdBy\": \"createdBy1\",\r\n                \"incidentActionMembers\": [\r\n                    {\r\n                        \"healthSafeId\": \"anil_hsid\",\r\n                        \"memberType\": \"PRIMARY\",\r\n                        \"actionRequested\": \"DISABLE\",\r\n                        \"createdBy\": \"createdBy1\"\r\n                    },\r\n                    {\r\n                        \"healthSafeId\": \"raju_hsid\",\r\n                        \"memberType\": \"IMPACTED\",\r\n                        \"actionRequested\": \"DISABLE\",\r\n                        \"createdBy\": \"createdBy1\"\r\n                    }\r\n                ]\r\n            }\r\n        ]\r\n    },\r\n    \"incidentAction\": {\r\n        \"incidentActionId\": null,\r\n        \"incidentId\": null,\r\n        \"createdBy\": null,\r\n        \"createdTs\": null,\r\n        \"incidentActionMembers\": null\r\n    },\r\n    \"incidentActionMember\": {\r\n        \"incidentActionMbrId\": null,\r\n        \"incidentActionId\": null,\r\n        \"healthSafeId\": null,\r\n        \"memberType\": null,\r\n        \"actionRequested\": null,\r\n        \"createdBy\": null,\r\n        \"createdTs\": null\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:2055/ProvisioningService/incident/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "2055",
+									"path": [
+										"ProvisioningService",
+										"incident",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

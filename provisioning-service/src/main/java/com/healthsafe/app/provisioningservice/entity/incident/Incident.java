@@ -24,7 +24,8 @@ public class Incident implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="INCIDENT_ID", unique = true, nullable = false)
+//    @Column(name="INCIDENT_ID", unique = true, nullable = false)
+    @Column(name="INCIDENT_ID", unique = true)
     private Integer incidentId;
 
     @Column(name="HLTHSF_ID")
@@ -117,8 +118,9 @@ public class Incident implements Serializable {
     @Column(name="CREAT_TS", columnDefinition = "TIMESTAMP", updatable = false)
     private LocalDateTime createdTs;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ID")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name = "INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ID")
+    @JoinColumn(name = "INCIDENT_ID")
     private List<IncidentAction> incidentActions;
 
     public Integer getIncidentId() {
