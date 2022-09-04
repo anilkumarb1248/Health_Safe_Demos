@@ -1,0 +1,3 @@
+
+Mapping Links:
+https://www.baeldung.com/hibernate-unsaved-transient-instance-error

@@ -6,19 +6,26 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="INCIDENT_ACTION_MBR")
-public class IncidentActionMember {
+public class IncidentActionMember  implements Serializable {
 
     @Id
-    @Column(name="INCIDENT_ACTION_MBR_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="INCIDENT_ACTION_MBR_ID", unique = true, nullable = false)
     private Integer incidentActionMbrId;
 
-    @Column(name="INCIDENT_ACTION_ID")
-    private Integer incidentActionId;
+//    @Column(name="INCIDENT_ACTION_ID")
+//    private Integer incidentActionId;
 
     @Column(name="HLTHSF_ID")
     private String healthSafeId;
@@ -34,8 +41,12 @@ public class IncidentActionMember {
     @Column(name="CREAT_BY")
     private String createdBy;
 
-    @Column(name="CREAT_TS")
-    private String createdTs;
+    @Column(name="CREAT_TS", columnDefinition = "TIMESTAMP", updatable = false)
+    private LocalDateTime createdTs;
+
+    @ManyToOne
+    @JoinColumn(name="INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID", nullable = false)
+    private IncidentAction incidentAction;
 
     public Integer getIncidentActionMbrId() {
         return incidentActionMbrId;
@@ -45,13 +56,13 @@ public class IncidentActionMember {
         this.incidentActionMbrId = incidentActionMbrId;
     }
 
-    public Integer getIncidentActionId() {
-        return incidentActionId;
-    }
-
-    public void setIncidentActionId(Integer incidentActionId) {
-        this.incidentActionId = incidentActionId;
-    }
+//    public Integer getIncidentActionId() {
+//        return incidentActionId;
+//    }
+//
+//    public void setIncidentActionId(Integer incidentActionId) {
+//        this.incidentActionId = incidentActionId;
+//    }
 
     public String getHealthSafeId() {
         return healthSafeId;
@@ -85,11 +96,19 @@ public class IncidentActionMember {
         this.createdBy = createdBy;
     }
 
-    public String getCreatedTs() {
+    public LocalDateTime getCreatedTs() {
         return createdTs;
     }
 
-    public void setCreatedTs(String createdTs) {
+    public void setCreatedTs(LocalDateTime createdTs) {
         this.createdTs = createdTs;
+    }
+
+    public IncidentAction getIncidentAction() {
+        return incidentAction;
+    }
+
+    public void setIncidentAction(IncidentAction incidentAction) {
+        this.incidentAction = incidentAction;
     }
 }

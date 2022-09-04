@@ -8,12 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="MBR")
-public class Mbr {
+public class Mbr  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
