@@ -91,11 +91,11 @@ public class IncidentService {
             }
         }
 
-        incident.setCreatedTs(LocalDateTime.now());
-        incident.getIncidentActions().forEach(ia-> {
-            ia.setCreatedTs(LocalDateTime.now());
-            ia.getIncidentActionMembers().forEach(iam->iam.setCreatedTs(LocalDateTime.now()));
-        });
+//        incident.setCreatedTs(LocalDateTime.now());
+//        incident.getIncidentActions().forEach(ia-> {
+//            ia.setCreatedTs(LocalDateTime.now());
+//            ia.getIncidentActionMembers().forEach(iam->iam.setCreatedTs(LocalDateTime.now()));
+//        });
         //incident.setReporterTs(LocalDateTime.now());
         //incident.setPrtl(new Prtl());
         //incident.setEnablementMessage(new EnablementMessage());
@@ -105,8 +105,17 @@ public class IncidentService {
 //        incident.setIncidentActions(Arrays.asList(incidentAction));
 
         incident = incidentRepository.save(incident);
-//        incidentRepository.flush();
 
+//        IncidentAction incidentAction = incident.getIncidentActions().get(0);
+//        incidentAction.setIncident(incident);
+//        incidentAction = incidentActionRepository.save(incidentAction);
+//        List<IncidentActionMember> incidentActionMemberList = incidentAction.getIncidentActionMembers();
+
+//        IncidentAction finalIncidentAction = incidentAction;
+//        incidentActionMemberList.forEach(actionMember ->{
+//            actionMember.setIncidentAction(finalIncidentAction);
+//        });
+//        incidentActionMemberRepository.saveAll(incidentActionMemberList);
         incidentResponse.setIncident(incident);
         return incidentResponse;
     }

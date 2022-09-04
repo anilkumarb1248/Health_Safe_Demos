@@ -3,6 +3,7 @@ package com.healthsafe.app.provisioningservice.entity.incident;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,17 +32,29 @@ public class IncidentAction implements Serializable {
     @Column(name="CREAT_BY")
     private String createdBy;
 
-    @Column(name="CREAT_TS", columnDefinition = "TIMESTAMP", updatable = false)
+    @Column(name="CREAT_TS", columnDefinition = "TIMESTAMP",insertable = false, updatable = false)
     private LocalDateTime createdTs;
 
-    @ManyToOne
-//    @JoinColumn(name="INCIDENT_ID", referencedColumnName = "INCIDENT_ID", nullable = false)
-    @JoinColumn(name="INCIDENT_ID")
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+////    @JoinColumn(name="INCIDENT_ID", referencedColumnName = "INCIDENT_ID", nullable = false)
+//    @JoinColumn(name="INCIDENT_ID", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "INCIDENT_ID")
+//    @JoinColumn(name = "INCIDENT_ID", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "INCIDENT_ID", nullable = false, insertable = false, updatable = false)
     private Incident incident;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID")
-    @JoinColumn(name = "INCIDENT_ACTION_ID")
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+////    @OneToMany(mappedBy = "incidentAction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+////    @JoinColumn(name = "INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID")
+//    @JoinColumn(name = "INCIDENT_ACTION_ID")
+//    @OneToMany(mappedBy = "incidentAction")
+//    @OneToMany(mappedBy = "incidentAction",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+////    @JoinColumn(name = "INCIDENT_ACTION_ID")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="INCIDENT_ACTION_ID", nullable = false)
     private List<IncidentActionMember> incidentActionMembers;
 
     public Integer getIncidentActionId() {

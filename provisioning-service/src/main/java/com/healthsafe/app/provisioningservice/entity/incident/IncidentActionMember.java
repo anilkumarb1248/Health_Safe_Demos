@@ -2,10 +2,12 @@ package com.healthsafe.app.provisioningservice.entity.incident;
 
 import com.healthsafe.app.provisioningservice.constants.IncidentConstants;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,12 +44,19 @@ public class IncidentActionMember  implements Serializable {
     @Column(name="CREAT_BY")
     private String createdBy;
 
-    @Column(name="CREAT_TS", columnDefinition = "TIMESTAMP", updatable = false)
+    @Column(name="CREAT_TS", columnDefinition = "TIMESTAMP",insertable = false, updatable = false)
     private LocalDateTime createdTs;
 
-    @ManyToOne
-//    @JoinColumn(name="INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID", nullable = false)
-    @JoinColumn(name="INCIDENT_ACTION_ID")
+
+////    @JoinColumn(name="INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ACTION_ID", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+////    @JoinColumn(name="INCIDENT_ID", referencedColumnName = "INCIDENT_ID", nullable = false)
+//    @JoinColumn(name="INCIDENT_ACTION_ID", nullable = false)
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "INCIDENT_ACTION_ID")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "INCIDENT_ACTION_ID+", nullable = false, insertable = false, updatable = false)
     private IncidentAction incidentAction;
 
     public Integer getIncidentActionMbrId() {

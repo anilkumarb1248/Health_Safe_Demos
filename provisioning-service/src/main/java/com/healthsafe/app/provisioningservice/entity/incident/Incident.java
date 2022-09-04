@@ -7,6 +7,7 @@ import com.healthsafe.app.provisioningservice.entity.Prtl;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -115,12 +116,21 @@ public class Incident implements Serializable {
     @Column(name="CREAT_BY")
     private String createdBy;
 
-    @Column(name="CREAT_TS", columnDefinition = "TIMESTAMP", updatable = false)
+    @Column(name="CREAT_TS", columnDefinition = "TIMESTAMP",insertable = false, updatable = false)
     private LocalDateTime createdTs;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ID")
-    @JoinColumn(name = "INCIDENT_ID")
+//    @OneToMany(cascade = cascadeCascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//    //    @OneToMany(mappedBy = "incident", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+////    @JoinColumn(name = "INCIDENT_ACTION_ID", referencedColumnName = "INCIDENT_ID")
+//    @JoinColumn(name = "INCIDENT_ID")
+//    @OneToMany(mappedBy = "incident")
+//    @OneToMany(mappedBy = "incident", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+//    @OneToMany(mappedBy = "incident",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn(name="INCIDENT_ID")
+//    @OneToMany(targetEntity = IncidentAction.class, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="INCIDENT_ID", nullable = false)
     private List<IncidentAction> incidentActions;
 
     public Integer getIncidentId() {
