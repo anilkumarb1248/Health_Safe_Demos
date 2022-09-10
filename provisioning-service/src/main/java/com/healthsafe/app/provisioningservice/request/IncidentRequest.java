@@ -1,9 +1,10 @@
 package com.healthsafe.app.provisioningservice.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.healthsafe.app.provisioningservice.entity.incident.Incident;
-import com.healthsafe.app.provisioningservice.entity.incident.IncidentAction;
-import com.healthsafe.app.provisioningservice.entity.incident.IncidentActionMember;
+import com.healthsafe.app.provisioningservice.model.incident.Incident;
+import com.healthsafe.app.provisioningservice.model.incident.IncidentActionMember;
+
+import java.util.List;
 
 
 @JsonIgnoreProperties
@@ -11,8 +12,7 @@ public class IncidentRequest {
 
     private Character reasonTypeCode;
     private Incident incident;
-    private IncidentAction incidentAction;
-    private IncidentActionMember incidentActionMember;
+    private List<IncidentActionMember> incidentActionMembers;
 
     public Character getReasonTypeCode() {
         return reasonTypeCode;
@@ -30,19 +30,11 @@ public class IncidentRequest {
         this.incident = incident;
     }
 
-    public IncidentAction getIncidentAction() {
-        return incidentAction;
+    public List<IncidentActionMember> getIncidentActionMembers() {
+        return incidentActionMembers;
     }
 
-    public void setIncidentAction(IncidentAction incidentAction) {
-        this.incidentAction = incidentAction;
-    }
-
-    public IncidentActionMember getIncidentActionMember() {
-        return incidentActionMember;
-    }
-
-    public void setIncidentActionMember(IncidentActionMember incidentActionMember) {
-        this.incidentActionMember = incidentActionMember;
+    public void setIncidentActionMembers(List<IncidentActionMember> incidentActionMembers) {
+        this.incidentActionMembers = incidentActionMembers;
     }
 }

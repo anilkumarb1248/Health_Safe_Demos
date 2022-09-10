@@ -1,16 +1,21 @@
 package com.healthsafe.app.provisioningservice.model.incident;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.healthsafe.app.provisioningservice.constants.IncidentConstants;
 
-public class IncidentActionMember {
-    private Integer incidentActionMbrId;
-    private Integer incidentActionId;
-    private String healthSafeId;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
+@JsonIgnoreProperties
+public class IncidentActionMember implements Serializable {
+
+    private Integer incidentActionMbrId;
+    private String healthSafeId;
     private IncidentConstants.MemberType memberType;
     private IncidentConstants.ActionRequested actionRequested;
     private String createdBy;
-    private String createdTs;
+    private LocalDateTime createdTs;
+    private Integer incidentActionId;
 
     public Integer getIncidentActionMbrId() {
         return incidentActionMbrId;
@@ -18,14 +23,6 @@ public class IncidentActionMember {
 
     public void setIncidentActionMbrId(Integer incidentActionMbrId) {
         this.incidentActionMbrId = incidentActionMbrId;
-    }
-
-    public Integer getIncidentActionId() {
-        return incidentActionId;
-    }
-
-    public void setIncidentActionId(Integer incidentActionId) {
-        this.incidentActionId = incidentActionId;
     }
 
     public String getHealthSafeId() {
@@ -60,11 +57,19 @@ public class IncidentActionMember {
         this.createdBy = createdBy;
     }
 
-    public String getCreatedTs() {
+    public LocalDateTime getCreatedTs() {
         return createdTs;
     }
 
-    public void setCreatedTs(String createdTs) {
+    public void setCreatedTs(LocalDateTime createdTs) {
         this.createdTs = createdTs;
+    }
+
+    public Integer getIncidentActionId() {
+        return incidentActionId;
+    }
+
+    public void setIncidentActionId(Integer incidentActionId) {
+        this.incidentActionId = incidentActionId;
     }
 }

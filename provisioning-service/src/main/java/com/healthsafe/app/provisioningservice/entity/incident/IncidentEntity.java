@@ -21,7 +21,7 @@ import java.util.List;
 
 @Entity
 @Table(name="INCIDENT")
-public class Incident implements Serializable {
+public class IncidentEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -131,7 +131,7 @@ public class Incident implements Serializable {
 //    @OneToMany(targetEntity = IncidentAction.class, cascade = CascadeType.ALL)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="INCIDENT_ID", nullable = false)
-    private List<IncidentAction> incidentActions;
+    private List<IncidentActionEntity> incidentActionEntities;
 
     public Integer getIncidentId() {
         return incidentId;
@@ -349,12 +349,12 @@ public class Incident implements Serializable {
         this.createdTs = createdTs;
     }
 
-    public List<IncidentAction> getIncidentActions() {
-        return incidentActions;
+    public List<IncidentActionEntity> getIncidentActions() {
+        return incidentActionEntities;
     }
 
-    public void setIncidentActions(List<IncidentAction> incidentActions) {
-        this.incidentActions = incidentActions;
+    public void setIncidentActions(List<IncidentActionEntity> incidentActionEntities) {
+        this.incidentActionEntities = incidentActionEntities;
     }
 
 }

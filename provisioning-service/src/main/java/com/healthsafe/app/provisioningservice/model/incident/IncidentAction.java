@@ -1,10 +1,16 @@
 package com.healthsafe.app.provisioningservice.model.incident;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class IncidentAction {
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@JsonIgnoreProperties
+public class IncidentAction implements Serializable {
     private Integer incidentActionId;
     private Integer incidentId;
+    private List<IncidentActionMember> incidentActionMembers;
     private String createdBy;
     private LocalDateTime createdTs;
 
@@ -22,6 +28,14 @@ public class IncidentAction {
 
     public void setIncidentId(Integer incidentId) {
         this.incidentId = incidentId;
+    }
+
+    public List<IncidentActionMember> getIncidentActionMembers() {
+        return incidentActionMembers;
+    }
+
+    public void setIncidentActionMembers(List<IncidentActionMember> incidentActionMembers) {
+        this.incidentActionMembers = incidentActionMembers;
     }
 
     public String getCreatedBy() {

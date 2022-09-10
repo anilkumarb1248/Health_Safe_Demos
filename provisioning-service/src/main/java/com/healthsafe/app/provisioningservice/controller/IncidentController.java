@@ -1,7 +1,7 @@
 package com.healthsafe.app.provisioningservice.controller;
 
+import com.healthsafe.app.provisioningservice.model.incident.Incident;
 import com.healthsafe.app.provisioningservice.request.IncidentRequest;
-import com.healthsafe.app.provisioningservice.request.IncidentResponse;
 import com.healthsafe.app.provisioningservice.response.IndividualResponse;
 import com.healthsafe.app.provisioningservice.response.Status;
 import com.healthsafe.app.provisioningservice.service.IncidentService;
@@ -32,14 +32,14 @@ public class IncidentController {
     }
 
     @PostMapping("/create")
-    public Callable<ResponseEntity<IndividualResponse<IncidentResponse>>> createIncident(@RequestBody @Valid IncidentRequest incidentRequest){
+    public Callable<ResponseEntity<IndividualResponse<Incident>>> createIncident(@RequestBody @Valid IncidentRequest incidentRequest){
 
-        IndividualResponse<IncidentResponse> individualResponse = new IndividualResponse<>();
+        IndividualResponse<Incident> individualResponse = new IndividualResponse<>();
 
         try{
-            IncidentResponse incidentResponse = incidentService.createIncident(incidentRequest);
+            Incident incident = incidentService.createIncident(incidentRequest);
             individualResponse.setStatus(Status.SUCCESS);
-            individualResponse.setValue(incidentResponse);
+            individualResponse.setValue(incident);
             return () -> new ResponseEntity<>(individualResponse, HttpStatus.OK);
         }catch(Exception e){
             LOGGER.error("Exception occurred while creating the incident: ", e);

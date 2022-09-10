@@ -4,9 +4,10 @@ import com.healthsafe.app.provisioningservice.entity.EnablementMessage;
 import com.healthsafe.app.provisioningservice.entity.EnablementReason;
 import com.healthsafe.app.provisioningservice.entity.PortalEnablementMessageReason;
 import com.healthsafe.app.provisioningservice.entity.Prtl;
-import com.healthsafe.app.provisioningservice.entity.incident.Incident;
-import com.healthsafe.app.provisioningservice.entity.incident.IncidentAction;
-import com.healthsafe.app.provisioningservice.entity.incident.IncidentActionMember;
+import com.healthsafe.app.provisioningservice.entity.incident.IncidentActionEntity;
+import com.healthsafe.app.provisioningservice.entity.incident.IncidentActionMemberEntity;
+import com.healthsafe.app.provisioningservice.entity.incident.IncidentEntity;
+import com.healthsafe.app.provisioningservice.model.incident.Incident;
 import com.healthsafe.app.provisioningservice.repository.EnablementMessageRepository;
 import com.healthsafe.app.provisioningservice.repository.EnablementReasonRepository;
 import com.healthsafe.app.provisioningservice.repository.IncidentActionMemberRepository;
@@ -15,7 +16,6 @@ import com.healthsafe.app.provisioningservice.repository.IncidentRepository;
 import com.healthsafe.app.provisioningservice.repository.PortalEnablementMessageReasonRepository;
 import com.healthsafe.app.provisioningservice.repository.PortalRepository;
 import com.healthsafe.app.provisioningservice.request.IncidentRequest;
-import com.healthsafe.app.provisioningservice.request.IncidentResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -62,33 +62,44 @@ public class IncidentService {
     }
 
     @Transactional
-    public IncidentResponse createIncident(IncidentRequest incidentRequest) {
+    public Incident createIncident(IncidentRequest incidentRequest) {
+
+        IncidentEntity incidentEntity = new IncidentEntity();
+        BeanUtils.copyProperties(incidentRequest.getIncident(), incidentEntity);
+
+        IncidentActionEntity incidentActionEntity = new IncidentActionEntity();
+        incidentActionEntity.setCreatedBy(incidentEntity.getCreatedBy());
+
+        List<IncidentActionMemberEntity> incidentActionMemberEntityList = new ArrayList<>();
+        incidentRequest.getIncidentActionMembers().forEach(member ->{
+            IncidentActionMemberEntity incidentActionMemberEntity = new IncidentActionMemberEntity();
+            BeanUtils.copyProperties(member, incidentActionMemberEntity);
+            incidentActionMemberEntityList.add(incidentActionMemberEntity);
+        });
+        incidentActionEntity.setIncidentActionMembers(incidentActionMemberEntityList);
+        incidentEntity.setIncidentActions(Arrays.asList(incidentActionEntity));
 
 
 
-        IncidentResponse incidentResponse = new IncidentResponse();
-        BeanUtils.copyProperties(incidentRequest, incidentResponse);
+//        Optional<Prtl> portalOptional =  portalRepository.findById(incidentEntity.getPrtl().getPrtlId());
+//        if(portalOptional.isPresent()){
+//            incidentEntity.setPrtl(portalOptional.get());
+//        }
+//
+//        Optional<EnablementReason> reasonOptional =  enablementReasonRepository.findById(incidentEntity.getEnablementReason().getReasonId());
+//        if(reasonOptional.isPresent()){
+//            incidentEntity.setEnablementReason(reasonOptional.get());
+//        }
 
-        Incident incident = incidentResponse.getIncident() != null ? incidentResponse.getIncident() : new Incident();
-
-        Optional<Prtl> portalOptional =  portalRepository.findById(incident.getPrtl().getPrtlId());
-
-        if(portalOptional.isPresent()){
-            incident.setPrtl(portalOptional.get());
-        }
-
-        Optional<EnablementReason> reasonOptional =  enablementReasonRepository.findById(incident.getEnablementReason().getReasonId());
-
-        if(reasonOptional.isPresent()){
-            incident.setEnablementReason(reasonOptional.get());
-        }
-
-        List<PortalEnablementMessageReason> portalEnablementMessageReasons = portalEnablementMessageReasonRepository.findByPortalIdAndReasonTypeCode(incident.getPrtl().getPrtlId(), incidentRequest.getReasonTypeCode());
+        List<PortalEnablementMessageReason> portalEnablementMessageReasons = portalEnablementMessageReasonRepository.findByPortalIdAndReasonTypeCode(incidentEntity.getPrtl().getPrtlId(), incidentRequest.getReasonTypeCode());
         if(CollectionUtils.isNotEmpty(portalEnablementMessageReasons)){
-            Optional<EnablementMessage> messageOptional = enablementMessageRepository.findById(portalEnablementMessageReasons.get(0).getMessageId());
-            if(messageOptional.isPresent()){
-                incident.setEnablementMessage(messageOptional.get());
-            }
+            EnablementMessage enablementMessage = new EnablementMessage();
+            enablementMessage.setEnableDisableMessageId(portalEnablementMessageReasons.get(0).getMessageId());
+//            Optional<EnablementMessage> messageOptional = enablementMessageRepository.findById(portalEnablementMessageReasons.get(0).getMessageId());
+//            if(messageOptional.isPresent()){
+//                incidentEntity.setEnablementMessage(messageOptional.get());
+//            }
+            incidentEntity.setEnablementMessage(enablementMessage);
         }
 
 //        incident.setCreatedTs(LocalDateTime.now());
@@ -104,7 +115,7 @@ public class IncidentService {
 //        incidentAction.setIncidentActionMembers(Arrays.asList(new IncidentActionMember()));
 //        incident.setIncidentActions(Arrays.asList(incidentAction));
 
-        incident = incidentRepository.save(incident);
+        incidentEntity = incidentRepository.save(incidentEntity);
 
 //        IncidentAction incidentAction = incident.getIncidentActions().get(0);
 //        incidentAction.setIncident(incident);
@@ -116,7 +127,10 @@ public class IncidentService {
 //            actionMember.setIncidentAction(finalIncidentAction);
 //        });
 //        incidentActionMemberRepository.saveAll(incidentActionMemberList);
-        incidentResponse.setIncident(incident);
+
+        Incident incidentResponse = new Incident();
+        BeanUtils.copyProperties(incidentEntity, incidentResponse);
+
         return incidentResponse;
     }
 

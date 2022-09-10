@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -18,7 +17,7 @@ import java.util.List;
 
 @Entity
 @Table(name="INCIDENT_ACTION")
-public class IncidentAction implements Serializable {
+public class IncidentActionEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +42,7 @@ public class IncidentAction implements Serializable {
 //    @JoinColumn(name = "INCIDENT_ID", insertable = false, updatable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "INCIDENT_ID", nullable = false, insertable = false, updatable = false)
-    private Incident incident;
+    private IncidentEntity incidentEntity;
 
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 ////    @OneToMany(mappedBy = "incidentAction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -55,7 +54,7 @@ public class IncidentAction implements Serializable {
 ////    @JoinColumn(name = "INCIDENT_ACTION_ID")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="INCIDENT_ACTION_ID", nullable = false)
-    private List<IncidentActionMember> incidentActionMembers;
+    private List<IncidentActionMemberEntity> incidentActionMemberEntities;
 
     public Integer getIncidentActionId() {
         return incidentActionId;
@@ -89,19 +88,19 @@ public class IncidentAction implements Serializable {
         this.createdTs = createdTs;
     }
 
-    public List<IncidentActionMember> getIncidentActionMembers() {
-        return incidentActionMembers;
+    public List<IncidentActionMemberEntity> getIncidentActionMembers() {
+        return incidentActionMemberEntities;
     }
 
-    public void setIncidentActionMembers(List<IncidentActionMember> incidentActionMembers) {
-        this.incidentActionMembers = incidentActionMembers;
+    public void setIncidentActionMembers(List<IncidentActionMemberEntity> incidentActionMemberEntities) {
+        this.incidentActionMemberEntities = incidentActionMemberEntities;
     }
 
-    public Incident getIncident() {
-        return incident;
+    public IncidentEntity getIncident() {
+        return incidentEntity;
     }
 
-    public void setIncident(Incident incident) {
-        this.incident = incident;
+    public void setIncident(IncidentEntity incidentEntity) {
+        this.incidentEntity = incidentEntity;
     }
 }

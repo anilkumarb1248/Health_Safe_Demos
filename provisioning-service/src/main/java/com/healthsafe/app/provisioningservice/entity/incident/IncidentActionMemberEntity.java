@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="INCIDENT_ACTION_MBR")
-public class IncidentActionMember  implements Serializable {
+public class IncidentActionMemberEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +56,7 @@ public class IncidentActionMember  implements Serializable {
 //    @JoinColumn(name = "INCIDENT_ACTION_ID")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "INCIDENT_ACTION_ID+", nullable = false, insertable = false, updatable = false)
-    private IncidentAction incidentAction;
+    private IncidentActionEntity incidentActionEntity;
 
     public Integer getIncidentActionMbrId() {
         return incidentActionMbrId;
@@ -115,12 +114,12 @@ public class IncidentActionMember  implements Serializable {
         this.createdTs = createdTs;
     }
 
-    public IncidentAction getIncidentAction() {
-        return incidentAction;
+    public IncidentActionEntity getIncidentAction() {
+        return incidentActionEntity;
     }
 
-    public void setIncidentAction(IncidentAction incidentAction) {
-        this.incidentAction = incidentAction;
+    public void setIncidentAction(IncidentActionEntity incidentActionEntity) {
+        this.incidentActionEntity = incidentActionEntity;
     }
 
 }
