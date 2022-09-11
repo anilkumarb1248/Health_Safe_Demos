@@ -91,6 +91,9 @@ public class IncidentService {
 //            incidentEntity.setEnablementReason(reasonOptional.get());
 //        }
 
+        List<EnablementMessage> messagesList = enablementMessageRepository.findAll();
+        List<PortalEnablementMessageReason> mappingList = portalEnablementMessageReasonRepository.findAll();
+
         List<PortalEnablementMessageReason> portalEnablementMessageReasons = portalEnablementMessageReasonRepository.findByPortalIdAndReasonTypeCode(incidentEntity.getPrtl().getPrtlId(), incidentRequest.getReasonTypeCode());
         if(CollectionUtils.isNotEmpty(portalEnablementMessageReasons)){
             EnablementMessage enablementMessage = new EnablementMessage();

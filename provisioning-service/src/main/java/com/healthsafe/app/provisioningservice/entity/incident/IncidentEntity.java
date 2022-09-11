@@ -38,8 +38,8 @@ public class IncidentEntity implements Serializable {
 //    @Column(name="PRTL_ID")
 //    private Integer prtlId;
 
-    @ManyToOne
-    @JoinColumn(name="PRTL_ID",referencedColumnName = "PRTL_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="PRTL_ID", insertable = false, updatable = false)
     private Prtl prtl;
 
 //    @Column(name="ENBL_DSBL_MSG_ID")
@@ -48,12 +48,12 @@ public class IncidentEntity implements Serializable {
 //    @Column(name="ENBL_DSBL_RSN_ID")
 //    private Integer reasonId;
 
-    @ManyToOne
-    @JoinColumn(name="ENBL_DSBL_MSG_ID", referencedColumnName = "ENBL_DSBL_MSG_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ENBL_DSBL_MSG_ID", insertable = false, updatable = false)
     private EnablementMessage enablementMessage;
 
-    @ManyToOne
-    @JoinColumn(name="ENBL_DSBL_RSN_ID", referencedColumnName = "ENBL_DSBL_RSN_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ENBL_DSBL_RSN_ID", insertable = false, updatable = false)
     private EnablementReason enablementReason;
 
     @Column(name="ISSUE_OCC_TS")

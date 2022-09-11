@@ -1,0 +1,50 @@
+{
+  "reasonTypeCode": "P",
+  "incident": {
+    "healthSafeId": "anil_hsid",
+    "incidentNumber": "Dummy_Incident",
+    "prtl": {
+      "prtlId": 1
+    },
+    "enablementMessage": {
+      "enableDisableMessageId": null
+    },
+    "enablementReason": {
+      "reasonId": 1
+    },
+    "issueOccurredTs": "2022-09-04T11:35:57.9206813",
+    "issueOccurredTimeZone": "(GMT+5:30)",
+    "issueDescription": "issueDescription",
+    "callerFirstName": "callerFirstName",
+    "callerLastName": "callerLastName",
+    "callerPhone": "callerPhone",
+    "callerEmail": "callerEmail",
+    "callerAuthorizedForOther": "callerAuthorizedForOther",
+    "callerAuthorizedMbrAccount": "callerAuthorizedMbrAccount",
+    "callerDevice": "callerDevice",
+    "callerInfoShared": "callerInfoShared",
+    "empFirstName": "empFirstName",
+    "empLastName": "empLastName",
+    "empMsId": "empMsId",
+    "empEmail": "empEmail",
+    "empDescription": "empDescription",
+    "reporterEmail": "reporterEmail",
+    "reporterTs": "2022-09-04T11:35:57.9206813",
+    "reporterTimeZone": "(GMT+5:30)",
+    "createdBy": "createdBy"
+  },
+  "incidentActionMembers": [
+    {
+      "healthSafeId": "anil_hsid",
+      "memberType": "PRIMARY",
+      "actionRequested": "DISABLE",
+      "createdBy": "createdBy1"
+    },
+    {
+      "healthSafeId": "raju_hsid",
+      "memberType": "IMPACTED",
+      "actionRequested": "DISABLE",
+      "createdBy": "createdBy1"
+    }
+  ]
+}
