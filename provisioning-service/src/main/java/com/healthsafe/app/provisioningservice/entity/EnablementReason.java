@@ -2,6 +2,8 @@ package com.healthsafe.app.provisioningservice.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -12,7 +14,8 @@ import java.time.LocalDateTime;
 public class EnablementReason implements Serializable {
 
     @Id
-    @Column(name="ENBL_DSBL_RSN_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ENBL_DSBL_RSN_ID", unique = true, nullable = false)
     private Integer reasonId;
 
     @Column(name="REASON")

@@ -40,7 +40,7 @@ public class IncidentController {
             Incident incident = incidentService.createIncident(incidentRequest);
             individualResponse.setStatus(Status.SUCCESS);
             individualResponse.setValue(incident);
-            return () -> new ResponseEntity<>(individualResponse, HttpStatus.OK);
+            return () -> new ResponseEntity<>(individualResponse, HttpStatus.CREATED);
         }catch(Exception e){
             LOGGER.error("Exception occurred while creating the incident: ", e);
             individualResponse.setStatus(Status.ERROR);

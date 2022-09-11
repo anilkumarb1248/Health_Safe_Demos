@@ -55,7 +55,7 @@ public class IncidentActionMemberEntity implements Serializable {
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "INCIDENT_ACTION_ID")
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "INCIDENT_ACTION_ID+", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "INCIDENT_ACTION_ID", nullable = false, insertable = false, updatable = false)
     private IncidentActionEntity incidentActionEntity;
 
     public Integer getIncidentActionMbrId() {

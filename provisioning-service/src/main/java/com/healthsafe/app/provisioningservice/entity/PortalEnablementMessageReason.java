@@ -2,6 +2,8 @@ package com.healthsafe.app.provisioningservice.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -12,16 +14,17 @@ import java.time.LocalDateTime;
 public class PortalEnablementMessageReason implements Serializable {
 
     @Id
-    @Column(name = "PRTL_MSG_RSN_MAP_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="PRTL_MSG_RSN_MAP_ID", unique = true, nullable = false)
     private Integer portalMessageReasonId;
 
-    @Column(name = "PRTL_ID")
+    @Column(name = "PRTL_ID", nullable = false)
     private Integer portalId;
 
-    @Column(name = "ENBL_DSBL_MSG_ID")
+    @Column(name = "ENBL_DSBL_MSG_ID", nullable = false)
     private Integer messageId;
 
-    @Column(name = "RSN_TYP_CD")
+    @Column(name = "RSN_TYP_CD", nullable = false)
     private Character reasonTypeCode;
 
     @Column(name = "CREAT_BY")

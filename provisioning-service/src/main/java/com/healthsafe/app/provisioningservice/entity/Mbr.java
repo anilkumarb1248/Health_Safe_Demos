@@ -79,7 +79,7 @@ public class Mbr  implements Serializable {
     private LocalDate termsAndConditionsAcceptedDate;
 
     @ManyToOne
-    @JoinColumn(name="MBR_STS_ID", nullable = false)
+    @JoinColumn(name="MBR_STS_ID", nullable = true)
     private MbrSts memberStatus;
 
     @Column(name="MBR_RGST_TYP_ID")

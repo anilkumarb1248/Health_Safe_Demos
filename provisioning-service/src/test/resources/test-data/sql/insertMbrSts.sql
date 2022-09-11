@@ -1,0 +1,6 @@
+
+INSERT INTO MBR_STS
+(`MBR_STS_NM`,`MBR_STS_DESC`,`CREAT_BY`,`UPDT_BY`)
+VALUES
+('PURGED','PURGED', 'anil', 'anil'),
+('DISABLED','DISABLED', 'anil', 'anil');
